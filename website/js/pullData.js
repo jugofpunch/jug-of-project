@@ -65,25 +65,30 @@ function buildResultsTable(data){
   tbl.appendChild(tblHead);
   tbl.appendChild(tblBody);
     body.appendChild(tbl);
-}
-/*
-    // Add button
     var button = document.createElement("button");
     button.innerHTML = "Load More Results";
     body.appendChild(button);
-    button.addEventListener("click", function(fromValue, toValue){
-	var fromValue = 0;
-	fromValue += 500;
-	console.log(fromValue);
-        var toValue = 10;
-	toValue += 510;
-	console.log(toValue);
-	var updateUrl = 'https://api.jugofpunch.com/dev/booze?from=' + fromValue + '&to=' + toValue;
-	console.log(updateUrl);
-        var uReq = new XMLHttpRequest();
-        uReq.open("GET", updateUrl);
-        uReq.send();
-    var data = JSON.parse(event.target.responseText);
+  //  button.addEventListener("click", handleButton());
+}
+
+/*
+function getAppendData(fromValue, size){
+    console.log('calling function');
+    var dataUrl = 'https://api.jugofpunch.com/dev/booze?from=' + fromValue + '&to=' + size;    
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", parseData);
+    oReq.open("GET", dataUrl);
+    oReq.send();
+}
+*/
+/*
+function handleButton(fromValue, size){
+    fromValue += 10;
+    getData(fromValue, 10, parseData); 
+}
+
+/*
+function appendResults(data, fromValue) {
 		    for (var i in data['hits']) {
     var newRow = tbl.insertRow(-1);
     var newCell = newRow.insertCell(0);
@@ -103,9 +108,7 @@ function buildResultsTable(data){
     newCell.appendChild(newText);
     var newCell = newRow.insertCell(5);
     var newText = document.createTextNode(data['hits'][i]['phone']);
-			newCell.appendChild(newText);}});
-
-    
-});
-
+			newCell.appendChild(newText);
+		    }
+}
 */
