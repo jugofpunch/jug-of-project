@@ -1,8 +1,8 @@
-getData('cactus', 31, parseData);
+getData(5000, 5, parseData);
 
-function getData(fromValue, toValue){
+function getData(fromValue, size){
     console.log('calling function');
-    var dataUrl = 'https://api.jugofpunch.com/dev/booze?from=' + fromValue + '&to=' + toValue;    
+    var dataUrl = 'https://api.jugofpunch.com/dev/booze?from=' + fromValue + '&to=' + size;    
     var oReq = new XMLHttpRequest();
     oReq.addEventListener("load", parseData);
     oReq.open("GET", dataUrl);
