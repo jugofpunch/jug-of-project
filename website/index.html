@@ -6,57 +6,8 @@
 <title>Jug of Punch</title>
 </head>
 <body>
-    <script id="results-template" type="text/x-handlebars-template">
-    <table id="results-table" summary="Jug of Punch Search Results">
-  <caption>Jug of Punch Search Results</caption>
-    <thead>
-      <tr>
-	<th>Brand Name</th>
-	<th>Store</th>
-	<th>Store Street Address</th>
-	<th>Store City</th>
-	<th>Store Zip Code</th>
-	<th>Store Phone Number</th>
-      </tr>
-      <thead>
-	<tbody>
-      {{#each hits}}
-      <tr>
-	<td>{{brand_name}}</td>
-	<td>{{store_name}}</td>
-	<td>{{address}}</td>
-	<td>{{city}}</td>
-	<td>{{zip}}</td>
-	<td>{{phone}}</td>
-	</tr>
-      {{/each}}
-      </tbody>
-    </table>
-<button name="button" id="button">Load more results</button>
-</script>
-    <script id="append-results-template" type="text/x-handlebars-template">
-	<tbody>
-      {{#each hits}}
-      <tr>
-	<td>{{brand_name}}</td>
-	<td>{{store_name}}</td>
-	<td>{{address}}</td>
-	<td>{{city}}</td>
-	<td>{{zip}}</td>
-	<td>{{phone}}</td>
-	</tr>
-      {{/each}}
-      </tbody>
-    </table>
-<button name="button" id="button">Load more results</button>
-</script>
-<h1>Jug of Punch!</h1>
+<h1>Jug of Punch</h1>
 <p>One pleasant evening in the month of June&hellip;</p>
-
-<div id="results"></div>
-
-<script src="js/handlebars-v4.0.10.js"></script>
-<script src="js/getData.js"></script>
-
+<script src="js/pullData.js"></script>
 </body>
 </html>
