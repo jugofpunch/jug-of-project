@@ -1,13 +1,23 @@
-var dataUrl = 'https://api.jugofpunch.com/dev/booze?from=0&to=10';
-var oReq = new XMLHttpRequest();
-oReq.open("GET", dataUrl);
-oReq.send();
+getData('cactus', 31, parseData);
 
-oReq.addEventListener("load", function(event){
-    var data = JSON.parse(event.target.responseText);
-    // get the reference for the body
+function getData(fromValue, toValue){
+    console.log('calling function');
+    var dataUrl = 'https://api.jugofpunch.com/dev/booze?from=' + fromValue + '&to=' + toValue;    
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", parseData);
+    oReq.open("GET", dataUrl);
+    oReq.send();
+}
+
+function parseData(){
+    console.log('called back');
+    var gotData = JSON.parse(this.responseText);
+    console.log(gotData);
+    buildResultsTable(gotData);
+}
+
+function buildResultsTable(data){
     var body = document.getElementsByTagName("body")[0];
- 
     // creates a <table> element and a <tbody> element
     var tbl = document.createElement("table");
     var tblHead = document.createElement("thead");
@@ -55,7 +65,8 @@ oReq.addEventListener("load", function(event){
   tbl.appendChild(tblHead);
   tbl.appendChild(tblBody);
     body.appendChild(tbl);
-
+}
+/*
     // Add button
     var button = document.createElement("button");
     button.innerHTML = "Load More Results";
@@ -97,8 +108,4 @@ oReq.addEventListener("load", function(event){
     
 });
 
-
-
-    
-
-
+*/
