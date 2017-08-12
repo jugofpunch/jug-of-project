@@ -1,4 +1,6 @@
-getData(5000, 5, parseData);
+var fromValue = 6;
+
+getData(0, 5, parseData);
 
 function getData(fromValue, size){
     console.log('calling function');
@@ -9,11 +11,26 @@ function getData(fromValue, size){
     oReq.send();
 }
 
+function getAppendData(fromValue, size){
+    console.log('calling function');
+    var dataUrl = 'https://api.jugofpunch.com/dev/booze?from=' + fromValue + '&to=' + size;    
+    var oReq = new XMLHttpRequest();
+    oReq.addEventListener("load", parseAppendData);
+    oReq.open("GET", dataUrl);
+    oReq.send();
+}
+
 function parseData(){
     console.log('called back');
     var gotData = JSON.parse(this.responseText);
     console.log(gotData);
     buildResultsTable(gotData);
+}
+
+function parseAppendData(){
+    console.log('append called');
+    var gotData = JSON.parse(this.responseText);
+    buildAppendResults(gotData);
 }
 
 function buildResultsTable(data){
@@ -68,47 +85,37 @@ function buildResultsTable(data){
     var button = document.createElement("button");
     button.innerHTML = "Load More Results";
     body.appendChild(button);
-  //  button.addEventListener("click", handleButton());
+    button.addEventListener("click", handleButton);
 }
 
-/*
-function getAppendData(fromValue, size){
-    console.log('calling function');
-    var dataUrl = 'https://api.jugofpunch.com/dev/booze?from=' + fromValue + '&to=' + size;    
-    var oReq = new XMLHttpRequest();
-    oReq.addEventListener("load", parseData);
-    oReq.open("GET", dataUrl);
-    oReq.send();
-}
-*/
-/*
-function handleButton(fromValue, size){
-    fromValue += 10;
-    getData(fromValue, 10, parseData); 
+
+function handleButton(event){
+    // display the current click count inside the clicked div
+    fromValue += 5;
+    console.log(fromValue);
+    getAppendData(fromValue, 5, parseAppendData);
 }
 
-/*
-function appendResults(data, fromValue) {
-		    for (var i in data['hits']) {
+
+function buildAppendResults(data) {
+    var	tbl = document.getElementsByTagName("table")[0];
+    for (var i in data['hits']) {
     var newRow = tbl.insertRow(-1);
     var newCell = newRow.insertCell(0);
     var newText = document.createTextNode(data['hits'][i]['brand_name']);
     newCell.appendChild(newText);
     var newCell = newRow.insertCell(1);
-    var newText = document.createTextNode(data['hits'][i]['store_name']);
-    newCell.appendChild(newText);
-    var newCell = newRow.insertCell(2);
-    var newText = document.createTextNode(data['hits'][i]['address']);
-    newCell.appendChild(newText);
-    var newCell = newRow.insertCell(3);
-    var newText = document.createTextNode(data['hits'][i]['city']);
-    newCell.appendChild(newText);
-    var newCell = newRow.insertCell(4);
-    var newText = document.createTextNode(data['hits'][i]['zip']);
-    newCell.appendChild(newText);
-    var newCell = newRow.insertCell(5);
-    var newText = document.createTextNode(data['hits'][i]['phone']);
-			newCell.appendChild(newText);
-		    }
-}
-*/
+    var cellStoreName = document.createTextNode(data['hits'][i]['store_name']);
+    var cellAddress = document.createTextNode(data['hits'][i]['address']);
+	var cellCityStateZip = document.createTextNode(data['hits'][i]['city'] + ', Ohio ' + data['hits'][i]['zip']);
+	var cellPhone = document.createTextNode(data['hits'][i]['phone']);
+	newCell.appendChild(document.createElement("br"));
+	newCell.appendChild(cellStoreName);
+        newCell.appendChild(document.createElement("br"));
+        newCell.appendChild(cellAddress);
+        newCell.appendChild(document.createElement("br"));
+        newCell.appendChild(cellCityStateZip);
+        newCell.appendChild(document.createElement("br"));
+        newCell.appendChild(cellPhone);}}
+
+
